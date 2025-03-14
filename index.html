@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Chaves</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0D1117;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: #161B22;
+            padding: 25px;
+            border-radius: 15px;
+            width: 350px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        h2 {
+            color: #58A6FF;
+            margin-bottom: 15px;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            background: #21262D;
+            color: white;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        #generateButton {
+            background: #238636;
+            color: white;
+        }
+        #generateButton:hover {
+            background: #2EA043;
+        }
+        #copyButton {
+            background: #58A6FF;
+            color: white;
+        }
+        #copyButton:hover {
+            background: #1F6FEB;
+        }
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #8B949E;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔑 Gerador de Chaves</h2>
+        <input type="text" id="keyOutput" readonly>
+        <button id="generateButton" onclick="generateKey()">Gerar Chave</button>
+        <button id="copyButton" onclick="copyKey()" disabled>Copiar Chave</button>
+        <p id="message" class="message"></p>
+    </div>
+
+    <script>
+        function generateKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let key = '';
+            for (let i = 0; i < 16; i++) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById("keyOutput").value = key;
+            document.getElementById("message").innerText = "✅ Chave gerada com sucesso!";
+            document.getElementById("generateButton").disabled = true;
+            document.getElementById("copyButton").disabled = false;
+        }
+
+        function copyKey() {
+            const keyField = document.getElementById("keyOutput");
+            keyField.select();
+            document.execCommand("copy");
+            document.getElementById("message").innerText = "📋 Chave copiada!";
+        }
+    </script>
+</body>
+</html>
